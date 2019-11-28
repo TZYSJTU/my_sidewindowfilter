@@ -8,7 +8,7 @@ from module import DeepGuidedFilter, DeepGuidedFilterAdvanced, DeepGuidedFilterC
 from test_base import *
 
 parser = argparse.ArgumentParser(description='Evaluate Deep Guided Filtering Networks')
-parser.add_argument('--task',  type=str, default='l0_smooth',          help='TASK')
+parser.add_argument('--task',  type=str, default='auto_hdr',          help='TASK')
 parser.add_argument('--name',  type=str, default='HR',                 help='NAME')
 parser.add_argument('--model', type=str, default='deep_guided_filter', help='model')
 args = parser.parse_args()
@@ -17,7 +17,7 @@ config = copy.deepcopy(default_config)
 
 config.TASK = args.task
 config.NAME = args.name
-config.SET_NAME = 1024
+config.SET_NAME = 512
 
 # model
 if args.model in ['guided_filter', 'deep_guided_filter']:

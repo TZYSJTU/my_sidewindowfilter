@@ -14,9 +14,9 @@ from skimage.io import imsave
 default_config = Config(
     TASK = None,
     NAME = 'LR',
-    SET_NAME = 1024,
+    SET_NAME = 512,
     #################### CONSTANT #####################
-    IMG = 'dataset',
+    IMG = 'D:\data_set\input',
     LIST = 'train_test_list',
     MODEL_PATH = 'checkpoints',
     RESULT_PATH = 'results',
@@ -72,16 +72,16 @@ def run(config):
             config.model.cuda()
 
     # test
-    i_bar = tqdm(total=len(test_data), desc='#Images')
-    for idx, imgs in enumerate(test_data):
-        name = os.path.basename(test_data.get_path(idx))
+    # i_bar = tqdm(total=len(test_data), desc='#Images')
+    # for idx, imgs in enumerate(test_data):
+    #     name = os.path.basename(test_data.get_path(idx))
 
-        imgs = config.forward(imgs, config)
+    #     imgs = config.forward(imgs, config)
 
-        for path, img in zip(config.save_paths, imgs):
-            imsave(os.path.join(path, name), tensor_to_img(img, transpose=True))
+    #     for path, img in zip(config.save_paths, imgs):
+    #         imsave(os.path.join(path, name), tensor_to_img(img, transpose=True))
 
-        i_bar.update()
+    #     i_bar.update()
 
     if config.compare_paths is None:
         compare(config.save_paths[0], os.path.join(config.IMG, config.TASK, str(config.SET_NAME)))

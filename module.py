@@ -3,7 +3,7 @@ import torch.nn as nn
 
 from torch.nn import init
 
-from guided_filter_pytorch.guided_filter import FastGuidedFilter, ConvGuidedFilter, sFastGuidedFilter
+from guided_filter import FastGuidedFilter, ConvGuidedFilter, sFastGuidedFilter
 
 def weights_init_identity(m):
     classname = m.__class__.__name__

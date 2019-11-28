@@ -7,8 +7,9 @@ from module import DeepGuidedFilter, DeepGuidedFilterAdvanced, DeepGuidedFilterC
 if __name__ =='__main__':
     parser = argparse.ArgumentParser(description='Train Deep Guided Filtering Networks')
     parser.add_argument('--task',  type=str, default='auto_hdr',           help='TASK')
-    parser.add_argument('--name',  type=str, default='HR',                 help='NAME')
+    parser.add_argument('--name',  type=str, default='swf',                 help='NAME')
     parser.add_argument('--model', type=str, default='deep_guided_filter', help='model')
+    parser.add_argument('--keep_training', type=bool, default=False, help='use latest model')
     args = parser.parse_args()
 
     config = copy.deepcopy(default_config)
@@ -17,10 +18,13 @@ if __name__ =='__main__':
     config.NAME = args.name
     config.N_EPOCH = 150
     config.DATA_SET = 512
+    config.keep_training = args.keep_training
 
     # model
     if args.model == 'deep_guided_filter':
         config.model = DeepGuidedFilter().cuda()
+        if config.keep_training == True:
+            config.model.init_lr(os.path.join('checkpoints',config.TASK,config.NAME,'snapshots/net_epoch_54.pth'))
     elif args.model == 'deep_guided_filter_advanced':
         config.model = DeepGuidedFilterAdvanced()
     elif args.model == 'deep_conv_guided_filter':

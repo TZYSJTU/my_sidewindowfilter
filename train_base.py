@@ -39,7 +39,8 @@ default_config = Config(
     # img size
     exceed_limit = None,
     # vis
-    vis = None
+    vis = None,
+    keep_training = False
 )
 
 def run(config, keep_vis=False):
